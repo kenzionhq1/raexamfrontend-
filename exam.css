@@ -1,0 +1,78 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    padding: 30px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .exam-header {
+    text-align: center;
+  }
+  
+  .timer {
+    font-size: 24px;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  #progress {
+    font-size: 18px;
+    margin: 10px;
+    color: #555;
+  }
+  
+  .exam-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .question-block {
+    margin-bottom: 20px;
+  }
+  
+  .question-block p {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .question-block label {
+    display: block;
+    background: #f0f0f0;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #navigation {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #navigation button {
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  #navigation button:hover {
+    background-color: #005fa3;
+  }
+  
+  #navigation button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+  }
+  

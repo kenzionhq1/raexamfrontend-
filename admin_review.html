@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Review Submission</title>
+  <link rel="stylesheet" href="result.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="result-header">
+    <h2>User Result Review</h2>
+    <p id="userInfo"></p>
+    <div style="margin-top: 20px;">
+      <button onclick="goBack()" class="admin-btn">Back to Results</button>
+      <button onclick="exportPDF()" class="admin-btn">Export to PDF</button>
+    </div>
+  </div>
+
+  <div id="review" class="result-review"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="admin_review.js"></script>
+</body>
+</html>

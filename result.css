@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 30px;
+    margin: 0;
+  }
+  
+  .result-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  #circle {
+    width: 120px;
+    height: 120px;
+    margin: 15px auto;
+    border-radius: 50%;
+    background: conic-gradient(#ccc 0%, #ccc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #scoreText {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .result-review {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question-review {
+    margin-bottom: 30px;
+  }
+  
+  .question-review p {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
