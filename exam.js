@@ -130,7 +130,7 @@ async function submitExam() {
   } catch (err) {
     alert("Failed to connect to server. Please try again.");
     console.error(err);
-  }
+  }s
 }
 
 document.getElementById('submitBtn').onclick = async () => {
