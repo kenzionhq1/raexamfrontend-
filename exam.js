@@ -28,7 +28,7 @@ async function loadQuestions() {
     const res = await fetch(`https://ra-exam.onrender.com/api/questions?rank=${encodeURIComponent(user.rank)}`);
     const data = await res.json();
 
-    if (data.success && data.questions && data.questions.length > 0) {
+    if (data.success && data.questions && data.questions.length < 51) {
       questions = data.questions;
       renderQuestion(currentIndex);
     } else {
@@ -90,6 +90,10 @@ document.getElementById('nextBtn').onclick = () => {
   if (!selected) return alert("Please answer this question before continuing.");
   saveAnswer();
   currentIndex++;
+  if (currentIndex >= questions.length) {
+    alert("You have reached the end of the exam.");
+    return;
+  }
   renderQuestion(currentIndex);
 };
 
@@ -109,8 +113,11 @@ async function submitExam() {
 
   const unanswered = questions.length - Object.keys(answers).length;
   if (unanswered > 0) {
-    const confirmSubmit = confirm(`You skipped ${unanswered} question(s). Submit anyway?`);
-    if (!confirmSubmit) return;
+    // Disable navigation buttons and indicate submission
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    document.getElementById('prevBtn').textContent = 'Submitting...';
+    document.getElementById('nextBtn').textContent = 'Submitting...';
   }
 
   try {
@@ -147,12 +154,7 @@ document.getElementById('submitBtn').onclick = async () => {
     if (val) answers[q._id] = val;
   });
 
-  const unanswered = questions.length - Object.keys(answers).length;
-  if (unanswered > 0) {
-    const confirmSubmit = confirm(`You skipped ${unanswered} question(s). Submit anyway?`);
-    if (!confirmSubmit) return;
-  }
-
+  
   try {
     const res = await fetch(`https://ra-exam.onrender.com/api/submit-exam`, {
       method: 'POST',
