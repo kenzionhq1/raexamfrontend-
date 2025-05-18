@@ -93,6 +93,46 @@ document.getElementById('nextBtn').onclick = () => {
   renderQuestion(currentIndex);
 };
 
+async function submitExam() {
+  if (!questions.length) {
+    alert("No questions loaded. Please try again.");
+    return;
+  }
+
+  saveAnswer();
+
+  const answers = {};
+  questions.forEach(q => {
+    const val = localStorage.getItem(q._id);
+    if (val) answers[q._id] = val;
+  });
+
+  const unanswered = questions.length - Object.keys(answers).length;
+  if (unanswered > 0) {
+    const confirmSubmit = confirm(`You skipped ${unanswered} question(s). Submit anyway?`);
+    if (!confirmSubmit) return;
+  }
+
+  try {
+    const res = await fetch(`https://ra-exam.onrender.com/api/submit-exam`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: user.name, rank: user.rank, answers })
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      localStorage.setItem('result', JSON.stringify(result));
+      window.location.href = 'result.html';
+    } else {
+      alert("Error submitting exam. Please try again.");
+    }
+  } catch (err) {
+    alert("Failed to connect to server. Please try again.");
+    console.error(err);
+  }
+}
+
 document.getElementById('submitBtn').onclick = async () => {
   if (!questions.length) {
     alert("No questions loaded. Please try again.");
