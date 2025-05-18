@@ -28,7 +28,7 @@ async function loadQuestions() {
     const res = await fetch(`https://ra-exam.onrender.com/api/questions?rank=${encodeURIComponent(user.rank)}`);
     const data = await res.json();
 
-    if (data.success && data.questions && data.questions.length < 51) {
+    if (data.success && data.questions && data.questions.length > 0) {
       questions = data.questions;
       renderQuestion(currentIndex);
     } else {
