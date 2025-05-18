@@ -5,6 +5,9 @@ let timeLeft = 30 * 60;
 let questions = [];
 let currentIndex = 0;
 
+// Show loading UI
+form.innerHTML = `<p style="text-align:center">Loading questions, please wait...</p>`;
+
 // Timer logic
 const timer = setInterval(() => {
   const mins = Math.floor(timeLeft / 60);
@@ -20,15 +23,21 @@ const timer = setInterval(() => {
 
 // Load questions from backend
 async function loadQuestions() {
-  const res = await fetch(`https://ra-exam.onrender.com/api/questions?rank=${encodeURIComponent(user.rank)}`);
-  const data = await res.json();
+  try {
+    await fetch('https://ra-exam.onrender.com/api/ping').catch(() => {});
+    const res = await fetch(`https://ra-exam.onrender.com/api/questions?rank=${encodeURIComponent(user.rank)}`);
+    const data = await res.json();
 
-  if (data.success && data.questions && data.questions.length > 0) {
-    questions = data.questions;
-    renderQuestion(currentIndex);
-  } else {
-    form.innerHTML = `<p style="color: red;">Failed to load questions for rank: ${user.rank}</p>`;
-    document.getElementById('navigation').style.display = 'none';
+    if (data.success && data.questions && data.questions.length > 0) {
+      questions = data.questions;
+      renderQuestion(currentIndex);
+    } else {
+      form.innerHTML = `<p style="color: red;">Failed to load questions for rank: ${user.rank}</p>`;
+      document.getElementById('navigation').style.display = 'none';
+    }
+  } catch (err) {
+    form.innerHTML = `<p style="color: red;">Error fetching questions. Please check your internet or try again later.</p>`;
+    console.error(err);
   }
 }
 
@@ -104,22 +113,27 @@ document.getElementById('submitBtn').onclick = async () => {
     if (!confirmSubmit) return;
   }
 
-  const res = await fetch(`https://ra-exam.onrender.com/api/submit-exam`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: user.name, rank: user.rank, answers })
-  });
+  try {
+    const res = await fetch(`https://ra-exam.onrender.com/api/submit-exam`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: user.name, rank: user.rank, answers })
+    });
 
-  const result = await res.json();
-  if (result.success) {
-    localStorage.setItem('result', JSON.stringify(result));
-    window.location.href = 'result.html';
-  } else {
-    alert("Error submitting exam.");
+    const result = await res.json();
+    if (result.success) {
+      localStorage.setItem('result', JSON.stringify(result));
+      window.location.href = 'result.html';
+    } else {
+      alert("Error submitting exam. Please try again.");
+    }
+  } catch (err) {
+    alert("Failed to connect to server. Please try again.");
+    console.error(err);
   }
 };
 
-// Show/hide Next/Prev/Submit buttons
+// Show/hide navigation buttons
 function updateButtons() {
   document.getElementById('prevBtn').disabled = currentIndex === 0;
   document.getElementById('nextBtn').style.display = currentIndex < questions.length - 1 ? 'inline-block' : 'none';

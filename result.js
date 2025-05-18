@@ -23,6 +23,10 @@ result.answers.forEach((item, index) => {
     if (opt === item.correctAnswer) {
       label.style.color = 'green';
       label.style.fontWeight = 'bold';
+      label.textContent += ' correct 🎉';
+    } else if (opt === item.userAnswer && opt !== item.correctAnswer) {
+      label.style.color = 'red';
+      label.textContent += ' incorrect ❌';
     }
     if (opt === item.userAnswer && opt !== item.correctAnswer) {
       label.style.color = 'red';
