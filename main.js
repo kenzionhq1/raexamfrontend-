@@ -26,6 +26,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     window.location.href = 'result.html';
   } else {
     alert("Access denied.");
+    alert("Invalid name or rank. Please check your details and try again.");
     btn.disabled = false;
     btn.textContent = "Start Exam";
   }
