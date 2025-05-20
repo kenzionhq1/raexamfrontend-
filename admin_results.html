@@ -2,23 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin - View Results</title>
+  <title>All Exam Results - Admin</title>
   <link rel="stylesheet" href="admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <div class="admin-container">
-    <h2>All Exam Results</h2>
-    <table>
+  <div class="admin-header">
+    <h2>Admin: All Exam Results</h2>
+
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="Search by name or rank..." />
+      <select id="rankFilter">
+        <option value="">Filter by Rank</option>
+        <option>Assistant Intern</option>
+        <option>Intern</option>
+        <option>Senior Intern</option>
+        <option>Envoy</option>
+        <option>Special Envoy</option>
+        <option>Senior Envoy</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="results-table-container">
+    <table id="resultsTable">
       <thead>
         <tr>
           <th>Name</th>
           <th>Rank</th>
           <th>Score</th>
           <th>Percentage</th>
-          <th>Submitted</th>
+          <th>Date</th>
+          <th>Action</th>
         </tr>
       </thead>
-      <tbody id="resultBody"></tbody>
+      <tbody></tbody>
     </table>
   </div>
 

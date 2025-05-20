@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Review Submission</title>
-  <link rel="stylesheet" href="result.css" />
+  <title>Review Result - Admin</title>
   <link rel="stylesheet" href="admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
   <div class="result-header">
-    <h2>User Result Review</h2>
+    <h2>Admin Review</h2>
+    <div id="circle"><div id="scoreText">0%</div></div>
     <p id="userInfo"></p>
-    <div style="margin-top: 20px;">
-      <button onclick="goBack()" class="admin-btn">Back to Results</button>
-      <button onclick="exportPDF()" class="admin-btn">Export to PDF</button>
+    <div style="text-align:center;">
+      <button onclick="goBack()">← Back</button>
+      <button onclick="exportToPDF()">Export to PDF</button>
     </div>
   </div>
 
   <div id="review" class="result-review"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="admin_review.js"></script>
 </body>
 </html>

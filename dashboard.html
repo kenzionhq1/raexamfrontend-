@@ -14,19 +14,23 @@
 
     
     <form id="loginForm">
-        <input type="text" id="name" required placeholder="Enter your name">
-        <select id="rank" required>
-            <option value="">Select rank</option>
-            <option value="Assistant Intern">Assistant Intern</option>
-            <option value="Intern">Intern</option>
-            <option value="Senior Intern">Senior Intern</option>
-            <option value="Envoy">Envoy</option>
-            <option value="Special Envoy">Special Envoy</option>
-            <option value="Senior Envoy">Senior Envoy</option>
-             <!-- Add all ranks here -->
-    </select>
-    <button type="submit">Start Exam</button>
-  </form>
+      <input type="text" id="name" placeholder="Full Name" required />
+      
+      <select id="rank" required>
+        <option value="">-- Select Rank --</option>
+        <option>Assistant Intern</option>
+        <option>Intern</option>
+        <option>Senior Intern</option>
+        <option>Envoy</option>
+        <option>Special Envoy</option>
+        <option>Senior Envoy</option>
+      </select>
+      
+      <input type="password" id="password" placeholder="Password" required />
+      
+      <button type="submit">Start Exam</button>
+    </form>
+    
       <script src="main.js"></script>
     </body>
     </html>

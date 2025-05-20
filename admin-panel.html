@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body style="display: none;" id="panelBody">
+  <h2>Admin Panel – Manage Users</h2>
+
+  <button onclick="logout()">Logout</button>
+
+  <table border="1" id="userTable"></table>
+
+  <h3>Add New User</h3>
+  <input id="name" placeholder="Name" />
+  <select id="rank">
+    <option>Assistant Intern</option>
+    <option>Intern</option>
+    <option>Senior Intern</option>
+    <option>Envoy</option>
+    <option>Special Envoy</option>
+    <option>Senior Envoy</option>
+  </select>
+  <input id="password" placeholder="Password" />
+  <button onclick="addUser()">Add</button>
+
+  <script>
+    // Access protection
+    if (!localStorage.getItem('admin')) {
+      alert("Access denied. Please log in first.");
+      window.location.href = "admin-login.html";
+    } else {
+      document.getElementById('panelBody').style.display = "block";
+    }
+
+    async function loadUsers() {
+      const res = await fetch('https://ra-exam.onrender.com/api/users');
+      const data = await res.json();
+      const table = document.getElementById('userTable');
+      table.innerHTML = `<tr><th>Name</th><th>Rank</th><th>Action</th></tr>` +
+        data.users.map(u => `
+          <tr>
+            <td>${u.name}</td>
+            <td>${u.rank}</td>
+            <td><button onclick="deleteUser('${u._id}')">Delete</button></td>
+          </tr>`).join('');
+    }
+
+    async function addUser() {
+      const name = document.getElementById('name').value;
+      const rank = document.getElementById('rank').value;
+      const password = document.getElementById('password').value;
+
+      await fetch('https://ra-exam.onrender.com/api/add-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, rank, password })
+      });
+
+      loadUsers();
+    }
+
+    async function deleteUser(id) {
+      const confirmDelete = confirm("Delete this user?");
+      if (!confirmDelete) return;
+
+      await fetch(`https://ra-exam.onrender.com/api/delete-user/${id}`, { method: 'DELETE' });
+      loadUsers();
+    }
+
+    function logout() {
+      localStorage.removeItem('admin');
+      window.location.href = 'admin-login.html';
+    }
+
+    loadUsers();
+  </script>
+</body>
+</html>

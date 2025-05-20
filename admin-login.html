@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login</title>
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 400px;
+      margin: 10% auto;
+      padding: 2rem;
+      background: #f5f6fa;
+      border: 1px solid #dcdde1;
+      border-radius: 6px;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.6rem;
+      font-size: 16px;
+    }
+    button {
+      background-color: #273c75;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #40739e;
+    }
+  </style>
+</head>
+<body>
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPass" placeholder="Enter Admin Password" />
+  <button onclick="login()">Login</button>
+
+<script>
+    async function login() {
+        const password = document.getElementById('adminPass').value;
+        const button = document.querySelector('button');
+        button.textContent = 'Logging in...';
+        button.disabled = true;
+
+        try {
+            const res = await fetch('https://ra-exam.onrender.com/api/admin-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                localStorage.setItem('admin', 'true');
+                window.location.href = 'admin-panel.html';
+            } else {
+                alert("Access Denied. Invalid password.");
+            }
+        } catch (error) {
+            alert("An error occurred. Please try again.");
+        } finally {
+            button.textContent = 'Login';
+            button.disabled = false;
+        }
+    }
+</script>
+
+    
+</body>
+</html>

@@ -15,6 +15,36 @@
   </div>
 
   <div id="review" class="result-review"></div>
+ 
+  <div class="result-footer">
+
+
+    <button onclick="downloadPDF()" style="margin: 10px auto; display: block; padding: 10px 20px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;">Download PDF</button>
+     <button onclick="goBack()" style="margin: 10px auto; display: block; padding: 10px 20px;
+     background-color: #0077cc;
+     color: white;
+     border: none;
+     border-radius: 6px;
+     font-size: 16px;
+     cursor: pointer;
+     transition: background 0.3s ease;">Back to Dashboard</button>
+   
+   
+   <script>
+      function goBack() {
+        window.location.href = "dashboard.html";
+      }
+    </script>
+   
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script src="result.js"></script>
 </body>

@@ -46,3 +46,52 @@ body {
     margin-bottom: 10px;
   }
   
+
+  #circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin: 20px auto;
+    background: #dcdde1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2f3640;
+  }
+  
+  .result-review {
+    max-width: 800px;
+    margin: auto;
+    padding: 1rem;
+  }
+  
+  .review-block {
+    background: #f1f2f6;
+    border-left: 6px solid #dcdde1;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  
+  .correct {
+    border-left-color: green;
+  }
+  .wrong {
+    border-left-color: red;
+  }
+  .skipped {
+    border-left-color: orange;
+  }
+  .correct-label {
+    color: green;
+  }
+  .wrong-label {
+    color: red;
+  }
+  .skipped-label {
+    color: orange;
+    font-style: italic;
+  }
+  
